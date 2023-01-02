@@ -8,10 +8,7 @@ export default StyleSheet.create({
         justifyContent: 'space-between'
     },
     surface: {
-        flexGrow: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexGrow: 1
     },
     buttonsContainer: {
         display: 'flex',
