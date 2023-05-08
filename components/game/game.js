@@ -19,8 +19,6 @@ export default function Game() {
 
     function removeCircle(xPos, yPos) {
 
-        console.log('remove')
-
         circles.current = circles.current.filter(circlePos => {
             
             if (circlePos[0] == xPos && circlePos[1] == yPos) {
@@ -44,9 +42,9 @@ export default function Game() {
         if (!circles.current.length)
             return;
 
-        circles.removed.push(circles.current.pop());
+        let [xPos, yPos] = circles.current.slice(-1)[0];
 
-        setCircles({ 'current': [...circles.current], 'removed': [...circles.removed] });
+        removeCircle(xPos, yPos);
 
     }
 
