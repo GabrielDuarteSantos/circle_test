@@ -9,9 +9,12 @@ export default function Game() {
     let [circles, setCircles] = useState({ 'current': [], 'removed': [] });
 
     function spawnCircle(event) {
+        
+        let locationX = event.nativeEvent.locationX;
+        let locationY = event.nativeEvent.locationY;
 
         setCircles({
-            'current': [...circles.current, [event.nativeEvent.locationX, event.nativeEvent.locationY]],
+            'current': [...circles.current, [locationX, locationY]],
             'removed': [...circles.removed]
         });
 
@@ -71,8 +74,16 @@ export default function Game() {
         <>
             <StatusBar barStyle='light-content' />
             <View style={styles.mainContainer}>
-                <Pressable style={styles.surface} onPress={event => spawnCircle(event)}>
-                    {circles.current.map((circlePos, i) => <Circle key={i} position={circlePos} removeCircle={removeCircle}></Circle>)}
+                <Pressable 
+                    style={styles.surface} 
+                    onPress={event => spawnCircle(event)}>
+                    {circles.current.map((circlePos, i) => 
+                        <Circle 
+                            key={i} 
+                            position={circlePos} 
+                            removeCircle={removeCircle}>                            
+                        </Circle>
+                    )}
                 </Pressable>
                 <View style={styles.buttonsContainer}>
                     <Pressable style={styles.button} onPress={removeLastCircle}>
