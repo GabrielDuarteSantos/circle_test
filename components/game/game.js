@@ -49,7 +49,7 @@ export default function Game() {
 
     return (
         <View style={styles.mainContainer}>
-            <Pressable style={styles.surface} onPress={event => spawnCircle(event)}>
+            <Pressable style={styles.surface} onPress={event => spawnCircle(event)} pointerEvents='box-only'>
                 {circles.current.map((circlePos, i) => <Circle key={i} position={circlePos}></Circle>)}
             </Pressable>
             <View style={styles.buttonsContainer}>
