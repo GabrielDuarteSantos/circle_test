@@ -15,7 +15,29 @@ export default function Game() {
             'removed': [...circles.removed]
         });
 
-    };
+    }
+
+    function removeCircle(xPos, yPos) {
+
+        console.log('remove')
+
+        circles.current = circles.current.filter(circlePos => {
+            
+            if (circlePos[0] == xPos && circlePos[1] == yPos) {
+
+                circles.removed.push(circlePos);
+
+                return false;
+
+            }
+
+            return true;
+            
+        });
+
+        setCircles({ 'current': [...circles.current], 'removed': [...circles.removed] });
+
+    }
 
     function removeLastCircle() {
 
@@ -26,7 +48,7 @@ export default function Game() {
 
         setCircles({ 'current': [...circles.current], 'removed': [...circles.removed] });
 
-    };
+    }
 
     function respawnLastCircle() {
 
@@ -37,13 +59,13 @@ export default function Game() {
 
         setCircles({ 'current': [...circles.current], 'removed': [...circles.removed] });
 
-    };
+    }
 
     function resetCircles() {
 
         setCircles({ 'current': [], 'removed': [] });
 
-    };
+    }
 
     console.log('-- current', circles.current.length, '-- removed', circles.removed.length);
 
@@ -51,8 +73,8 @@ export default function Game() {
         <>
             <StatusBar barStyle='light-content' />
             <View style={styles.mainContainer}>
-                <Pressable style={styles.surface} onPress={event => spawnCircle(event)} pointerEvents='box-only'>
-                    {circles.current.map((circlePos, i) => <Circle key={i} position={circlePos}></Circle>)}
+                <Pressable style={styles.surface} onPress={event => spawnCircle(event)}>
+                    {circles.current.map((circlePos, i) => <Circle key={i} position={circlePos} removeCircle={removeCircle}></Circle>)}
                 </Pressable>
                 <View style={styles.buttonsContainer}>
                     <Pressable style={styles.button} onPress={removeLastCircle}>
